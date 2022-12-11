@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Listing;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,21 +18,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('listings',[
         'heading'=>'Latest Listings',
-        'listings'=>[
-            [
-                'id'=>1,
-                'title'=>'Listing One',
-                'description'=>'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum aliquam illo animi neque consequatur molestiae, aspernatur corporis reprehenderit hic dignissimos. Animi sapiente quaerat voluptatibus eveniet saepe asperiores officia sint odit!'
-            ],
-            [
-                'id'=>2,
-                'title'=>'Listing Two',
-                'description'=>'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum aliquam illo animi neque consequatur molestiae, aspernatur corporis reprehenderit hic dignissimos. Animi sapiente quaerat voluptatibus eveniet saepe asperiores officia sint odit!'
-            ]
-        ]
+        'job_listings'=> Listing::all()
     ]);
 });
 
+
+Route::get('/job-listings/{id}', function($id){
+    return view('listing', [
+        'job_listing' => Listing::find($id)
+    ]);
+});
 
 
 
