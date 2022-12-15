@@ -17,20 +17,39 @@ use App\Models\Listing;
 
 Route::get('/', function () {
     return view('listings',[
-        'heading'=>'Latest Listings',
+
         'job_listings'=> Listing::all()
     ]);
 });
 
+// without exception
+// Route::get('/job-listings/{id}', function($id){ 
+//     return view('listing', [
+//         'job_listing' => Listing::find($id)
+//     ]);
+// });
 
-Route::get('/job-listings/{id}', function($id){
-    return view('listing', [
-        'job_listing' => Listing::find($id)
+// with exception handling
+// Route::get('/job-listings/{id}', function($id){
+    
+//     $listing = Listing::find($id);
+//     if($listing){
+//         return view('listing', [
+//             'job_listing' => $listing
+//         ]);
+//     } else{
+//         abort('404');
+//     }
+    
+// });
+
+// using route model binding
+// eloquent function
+Route::get('/job-listings/{listing}', function(Listing $listing){
+    return view('listing',[
+        'job_listing'=>$listing
     ]);
 });
-
-
-
 
 
 
