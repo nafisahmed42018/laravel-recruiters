@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ListingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Listing;
@@ -15,13 +16,8 @@ use App\Models\Listing;
 |
 */
 
-Route::get('/', function () {
-    return view('listings',[
-
-        'job_listings'=> Listing::all()
-    ]);
-});
-
+Route::get('/', [ListingController::class, 'index']);
+ 
 // without exception
 // Route::get('/job-listings/{id}', function($id){ 
 //     return view('listing', [
@@ -45,11 +41,7 @@ Route::get('/', function () {
 
 // using route model binding
 // eloquent function
-Route::get('/job-listings/{listing}', function(Listing $listing){
-    return view('listing',[
-        'job_listing'=>$listing
-    ]);
-});
+Route::get('/job-listings/{listing}', [ListingController::class, 'getSpecificJobListing'] );
 
 
 

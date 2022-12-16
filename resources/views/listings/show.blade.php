@@ -23,7 +23,7 @@
                         <div class="text-xl font-bold mb-4">{{$job_listing->company}}</div>
 
                         <x-listing-tags :tagsCSV="$job_listing->tags"/>
-                            
+
                         <div class="text-lg my-4">
                             <i class="fa-solid fa-location-dot"></i> {{$job_listing->location}}
                         </div>
